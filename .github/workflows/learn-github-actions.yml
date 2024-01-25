@@ -28,4 +28,4 @@ jobs:
           sleep 5 # Aguarda a inicialização do servidor FastAPI
 
       - name: Run Pytest
-        run: pytest
+        run: pytest -v
