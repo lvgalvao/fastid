@@ -7,6 +7,9 @@ jobs:
   test-fastapi-app:
     # Define o sistema operacional do runner.
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - name: Checkout repository
@@ -15,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11.6' # Especifique a versão do Python
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
