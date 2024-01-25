@@ -1,13 +1,31 @@
 name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
+
+# Define quando a ação será executada. Neste caso, em cada 'push'.
 on: [push]
+
 jobs:
-  check-bats-version:
+  test-fastapi-app:
+    # Define o sistema operacional do runner.
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+          python-version: '3.11.6' # Especifique a versão do Python
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi 'uvicorn["standard"]' pytest httpx pytest-asyncio
+
+      - name: Run FastAPI app
+        run: |
+          uvicorn fastid.app:app --reload &
+          sleep 5 # Aguarda a inicialização do servidor FastAPI
+
+      - name: Run Pytest
+        run: pytest
