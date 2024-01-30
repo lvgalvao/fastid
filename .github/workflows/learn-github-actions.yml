@@ -26,10 +26,5 @@ jobs:
           pip install poetry
           poetry install
 
-      - name: Run FastAPI app
-        run: |
-          uvicorn fastid.app:app --reload &
-          sleep 5 # Aguarda a inicialização do servidor FastAPI
-
       - name: Run Pytest
         run: pytest tests -v
