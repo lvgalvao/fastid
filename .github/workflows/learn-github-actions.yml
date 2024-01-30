@@ -25,7 +25,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry
           poetry install
-          poetry shell
 
       - name: Run Pytest
-        run: pytest tests -v
+        run:  poetry run pytest tests -v
