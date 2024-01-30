@@ -20,10 +20,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
+      - name: Install Poetry and dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install fastapi uvicorn[standard] pytest httpx pytest-asyncio
+          pip install poetry
+          poetry install
 
       - name: Run FastAPI app
         run: |
