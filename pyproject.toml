@@ -22,3 +22,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.taskipy.tasks]
 run = "lsof -ti :8000 | xargs kill -9 | uvicorn fastid.app:app"
+test = "lsof -ti :8000 | xargs kill -9 | pytest tests -v"
