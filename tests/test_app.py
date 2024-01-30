@@ -30,3 +30,9 @@ async def test_read_main_wrong_message():
         response = await ac.get("/")
     assert response.status_code == 200
     assert "Batatinhas" not in response.text
+
+@pytest.mark.asyncio
+async def test_read_login():
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+        response = await ac.get("/login")
+    assert response.status_code == 200
